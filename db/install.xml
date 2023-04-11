@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/course_transfer/db" VERSION="20200814" COMMENT="Course transfer Tool https://uit.yorku.ca Author: Patrick Thibaudeau All rights reserved XMLDB file for Moodle local/course_transfer"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="course_transfer_backup" COMMENT="Contains the list of backup orders done or to do">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Course ID to backup"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Id of the user who added this task"/>
+        <FIELD NAME="settings" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Json object of the settings for the backup"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="timescheduled" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Scheduled time for the backup"/>
+        <FIELD NAME="completed" TYPE="int" LENGTH="1" NOTNULL="false" SEQUENCE="false" COMMENT="1 if completed - 0 if not yet - -1 if error"/>
+        <FIELD NAME="log" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Log of the backup is there is an error/warning"/>
+        <FIELD NAME="timestarted" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Time when the backup started"/>
+        <FIELD NAME="timecompleted" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Time when backup completed"/>
+        <FIELD NAME="restore_settings" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Json object of the settings for the restore"/>
+        <FIELD NAME="restore_categoryid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="ID of the category to import in on the restore server"/>
+        <FIELD NAME="restore_restoreid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="ID of the restoration in the restore server"/>
+        <FIELD NAME="users_unenroled" TYPE="int" LENGTH="1" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="Boolean - Users have been unenroled"/>
+        <FIELD NAME="unenrol_users" TYPE="int" LENGTH="1" NOTNULL="false" DEFAULT="1" SEQUENCE="false" COMMENT="Boolean: Do we want to unenrol users"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="course_transfer_restor" COMMENT="Contains the list of restore orders done or to do">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Course ID of the course that will be created"/>
+        <FIELD NAME="categoryid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Category ID"/>
+        <FIELD NAME="settings" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="Json object of the settings for the restore"/>
+        <FIELD NAME="backupfile" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Name of the backup file to restore"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="completed" TYPE="int" LENGTH="1" NOTNULL="false" SEQUENCE="false" COMMENT="1 if completed - 0 if not yet - -1 if error"/>
+        <FIELD NAME="log" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Log of the restore is there is an error/warning"/>
+        <FIELD NAME="timestarted" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Time when restore started"/>
+        <FIELD NAME="timecompleted" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Time when restore completed"/>
+        <FIELD NAME="backup_backupid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="ID of the backup in the restore server"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>

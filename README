@@ -1,0 +1,20 @@
+# Course transfer #
+
+----------
+
+
+## Description ##
+This plugin allows administrators to schedule course back-ups and restoration to a remote server.
+
+A log system is available to see the progression of the backups/restores and the next scheduled processes
+
+Note: The two Moodle servers have to share the same folder for the import/export to work. We suggest using an NFS.
+
+## IMPORTANT ##
+An exported role is available in the role folder. You must either import that role inot your Moodle system or create a new role based on the teacher role with the following parameters
+
+	name: Course Transfer Override
+	shortname: coursetransferoverride
+	change capability viewhiddencourse to prohibit.
+
+Save the role. 
