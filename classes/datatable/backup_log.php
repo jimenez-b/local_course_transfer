@@ -73,9 +73,11 @@ class backup_log extends base
             $sql_orderby .= 'tb.timescheduled DESC';
         }
 
+        //CONU - COALESCE is a more compatible function than IFNULL
+        //replacing IFNULL for COALESCE
         $sql = "SELECT tb.id, '' AS moreinfo, tb.timescheduled, 
                     CONCAT(c.fullname, ' - ', c.shortname) AS coursename,
-                    tb.completed, IFNULL(tb.timecompleted, 0) - IFNULL(tb.timestarted, 0) AS backupduration,
+                    tb.completed, COALESCE(tb.timecompleted, 0) - COALESCE(tb.timestarted, 0) AS backupduration,
                     '' AS courseurl, '' AS deleteurl,
                     tb.courseid
                 FROM {course_transfer_backup} AS tb

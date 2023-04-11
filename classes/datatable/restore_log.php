@@ -73,10 +73,12 @@ class restore_log extends base
             $sql_orderby .= 'tb.timescheduled DESC';
         }
 
+        //CONU - COALESCE is a more compatible function than IFNULL
+        //replacing IFNULL for COALESCE
         $sql = "SELECT tr.id, '' AS moreinfo, tr.timecreated, 
                     CONCAT(c.fullname, ' - ', c.shortname) AS coursename,
                     ca.name AS categoryname,
-                    tr.completed, IFNULL(tr.timecompleted, 0) - IFNULL(tr.timestarted, 0) AS restoreduration,
+                    tr.completed, COALESCE(tr.timecompleted, 0) - COALESCE(tr.timestarted, 0) AS restoreduration,
                     '' AS courseurl,
                     tr.courseid
                 FROM {course_transfer_restor} AS tr
