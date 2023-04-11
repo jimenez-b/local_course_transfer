@@ -64,14 +64,7 @@ class restore_log extends base
 
         $sql_orderby = 'ORDER BY ';
         //Construct the ORDERBY clause
-        if ($order_by != '')
-        {
-            $sql_orderby .= $order_by;
-        }
-        else
-        {
-            $sql_orderby .= 'tb.timescheduled DESC';
-        }
+        $sql_orderby .= ($order_by != '') ? $order_by : 'tb.timescheduled DESC';
 
         //CONU - COALESCE is a more compatible function than IFNULL
         //replacing IFNULL for COALESCE
