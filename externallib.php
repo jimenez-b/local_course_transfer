@@ -338,14 +338,24 @@ class local_course_transfer_external extends external_api
     public static function get_categories()
     {
         global $CFG, $DB;
-        require_once("$CFG->dirroot/lib/coursecatlib.php");
-
+        //CONU - added check to include proper file according to version
+        if ($CFG->version > 3.10) {
+            require_once("$CFG->dirroot/course/classes/category.php");
+        } else {
+            require_once("$CFG->dirroot/lib/coursecatlib.php");
+        }
+        
         //Parameter validation
         //REQUIRED
         $params = self::validate_parameters(self::get_categories_parameters(), array());
 
         //Prepare the object
-        $categories = coursecat::make_categories_list();
+        //CONU - added check to include proper file according to version
+        if ($CFG->version > 3.10) {
+            $categories = core_course_category::make_categories_list();
+        } else {
+            $categories = coursecat::make_categories_list();
+        }
         
         $return_object = array();
         foreach($categories as $id => $name)
@@ -355,8 +365,6 @@ class local_course_transfer_external extends external_api
             $category->name = $name;
             $return_object[] = $category;
         }
-        
-
 
         return $return_object;
     }
