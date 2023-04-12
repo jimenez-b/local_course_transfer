@@ -6,6 +6,9 @@ if ($hassiteconfig) {
     $settings = new admin_settingpage('local_course_transfer', get_string('pluginname', 'local_course_transfer'));
     $ADMIN->add('localplugins', $settings);
 
+    $title = get_string('page_log','local_course_transfer');
+    $desc  = get_string('page_log_help','local_course_transfer');
+    $settings->add(new admin_setting_heading('local_course_transfer_logs_header', $title, $desc));
 
     //Setting - Folder full path where to put backups
     $title = get_string('host', 'local_course_transfer');

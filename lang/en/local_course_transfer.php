@@ -135,3 +135,4 @@ $string['title_restore_logs'] = 'Restore logs';
 $string['title_restoreoptions'] = 'Restore settings';
 $string['unenrol_users'] = 'Unenrol users from courses once restore is completed?';
 $string['unenrol_users_help'] = 'Selecting yes will unenrol all users on this server from the courses selected above when the restore process is completed.';
+$string['page_log_help'] = 'Check the logs for the completed transfers here:<a href="'.new moodle_url('/local/course_transfer/index.php').'">Transfer Logs</a>';
